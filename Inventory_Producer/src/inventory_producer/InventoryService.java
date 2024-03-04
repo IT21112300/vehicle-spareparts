@@ -1,6 +1,7 @@
 package inventory_producer;
 
+//InventoryService.java
 public interface InventoryService {
-    void addInventoryItem(String itemName, int quantity);
-    void viewInventory();
+ void addItem(String itemName, int amount);
+ String viewItems();
 }
