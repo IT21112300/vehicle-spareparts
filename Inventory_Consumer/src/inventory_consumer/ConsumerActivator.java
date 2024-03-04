@@ -1,6 +1,7 @@
+// IT21112300 
+// Shashikala W.A.A.
 package inventory_consumer;
 
-//ConsumerActivator.java
 import org.osgi.framework.BundleActivator;
 import org.osgi.framework.BundleContext;
 import org.osgi.framework.ServiceReference;
@@ -15,9 +16,9 @@ public class ConsumerActivator implements BundleActivator {
      if (serviceReference != null) {
          InventoryService inventoryService = context.getService(serviceReference);
          System.out.println("Consumer: Inventory Service Obtained");
-         // Initialize InventoryServiceUser with the obtained InventoryService
+
          inventoryServiceUser = new InventoryServiceUser(inventoryService);
-         // Call the interactWithInventoryService method
+
          inventoryServiceUser.interactWithInventoryService();
      } else {
          System.out.println("Consumer: Inventory Service not available");

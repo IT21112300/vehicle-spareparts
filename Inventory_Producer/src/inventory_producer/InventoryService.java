@@ -1,7 +1,8 @@
+// IT21112300 
+// Shashikala W.A.A.
 package inventory_producer;
 
-//InventoryService.java
 public interface InventoryService {
- void addItem(String itemName, int amount);
- String viewItems();
+    void addInventoryItem(String itemName, int quantity,double price);
+    String viewInventory();
 }

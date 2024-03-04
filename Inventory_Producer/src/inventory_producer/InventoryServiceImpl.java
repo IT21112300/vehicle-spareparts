@@ -1,22 +1,35 @@
+// IT21112300 
+// Shashikala W.A.A.
 package inventory_producer;
 
-// InventoryServiceImpl.java
 import java.util.HashMap;
 import java.util.Map;
 
 public class InventoryServiceImpl implements InventoryService {
-    private Map<String, Integer> inventory = new HashMap<>();
+    private Map<String, InventoryItem> inventory = new HashMap<>();
 
     @Override
-    public void addItem(String itemName, int amount) {
-        inventory.put(itemName, inventory.getOrDefault(itemName, 0) + amount);
+    public void addInventoryItem(String itemName, int quantity, double price) {
+        InventoryItem item = inventory.get(itemName);
+        if (item == null) {
+            item = new InventoryItem(itemName, quantity, price);
+        } else {
+            item.setQuantity(item.getQuantity() + quantity);
+        }
+        inventory.put(itemName, item);
+        System.out.println("\nAdded " + quantity + " " + itemName + " to inventory.\n");
     }
 
     @Override
-    public String viewItems() {
-        StringBuilder sb = new StringBuilder("Current Inventory:\n");
-        for (Map.Entry<String, Integer> entry : inventory.entrySet()) {
-            sb.append(entry.getKey()).append(": ").append(entry.getValue()).append("\n");
+    public String viewInventory() {
+    	
+        StringBuilder sb = new StringBuilder();
+        
+        sb.append("Current Inventory:\n\n");
+        sb.append("Item\t\tQuantity\tPrice\n\n");
+        for (Map.Entry<String, InventoryItem> entry : inventory.entrySet()) {
+            InventoryItem item = entry.getValue();
+            sb.append(item.getName()).append("\t\t").append(item.getQuantity()).append("\t\tRs.").append(item.getPrice()).append("\n");
         }
         return sb.toString();
     }
