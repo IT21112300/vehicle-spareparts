@@ -5,6 +5,7 @@ package inventory_consumer;
 
 import inventory_producer.InventoryService;
 
+import java.util.InputMismatchException;
 import java.util.Scanner;
 
 public class InventoryServiceUser {
@@ -27,41 +28,75 @@ public class InventoryServiceUser {
                 + "                                                                                                       __/ |\r\n"
                 + "                                                                                                      |___/ \r\n"
                 + "");
+        System.out.println("**********************************************************");
+        System.out.println("                          Menu                            ");
+        System.out.println("**********************************************************");
 
-        System.out.println("1. Add items");
-        System.out.println("2. View items");
-        System.out.println("99. Exit");
-        System.out.println("Enter your choice:");
+        System.out.println("1 :    Add items");
+        System.out.println("2 :    View items");
+        System.out.println("99:   Exit\n\n");
+        System.out.println("Enter your choice (Enter the number assigned...):");
         
         int choice = scanner.nextInt();
         while (choice != 99) {
             switch (choice) {
-                case 1:
-                    System.out.println("Enter item name:");
-                    String itemName = scanner.next();
-                    System.out.println("Enter quantity:");
-                    int amount = scanner.nextInt();
-                    System.out.println("Enter price:");
-                    double price = scanner.nextDouble(); 
-                    inventoryService.addInventoryItem(itemName, amount, price);
-                    System.out.println("****************Item added successfully.****************\n");
-                    break;
-                case 2:
+            case 1:
+            	System.out.println("\n============================================================\n");
+                System.out.println("Enter item name:");
+                String itemName = scanner.next();
+                int amount = 0;
+                boolean validAmount = false;
+                while (!validAmount) {
+                    try {
+                        System.out.println("Enter quantity:");
+                        amount = scanner.nextInt();
+                        validAmount = true;
+                    } catch (InputMismatchException e) {
+                        System.out.println("\nInvalid input! Please enter valid numeric value for quantity....\n");
+                        scanner.next(); 
+                    }
+                }
+                double price = 0;
+                boolean validPrice = false;
+                while (!validPrice) {
+                    try {
+                        System.out.println("Enter unit price:");
+                        price = scanner.nextDouble();
+                        validPrice = true;
+                    } catch (InputMismatchException e) {
+                        System.out.println("\nInvalid input! Please enter a valid numeric value for price....\n");
+                        scanner.next(); 
+                    }
+                }
+                inventoryService.addInventoryItem(itemName, amount, price);
+                System.out.println("Item added successfully!.\n\n");
+            	System.out.println("\n============================================================\n");
+                break;
+                    
+                case 2:                   
+                	System.out.println("\n------------------------------------------------------------\n");
                     System.out.println(inventoryService.viewInventory()); 
-                    System.out.println("*********************************************************\n");
+                	System.out.println("\n============================================================\n");
                     break;
+                    
                 default:
-                    System.out.println("\nInvalid choice. Please try again.\n");
+                    System.out.println("\nInvalid choice!. Please try again....\n");
+                	System.out.println("\n============================================================\n");
                     break;
             }
-            System.out.println("1. Add items");
-            System.out.println("2. View items");
-            System.out.println("99. Exit\n");
-            System.out.println("Enter your choice:");
+            System.out.println("**********************************************************");
+            System.out.println("                          Menu                            ");
+            System.out.println("**********************************************************");
+            
+            System.out.println("1 :  	Add items");
+            System.out.println("2 : 	View items");
+            System.out.println("99: 	Exit\n\n");
+            System.out.println("Enter your choice (Enter the number assigned...)");
             choice = scanner.nextInt();
         }
+        
         System.out.println("Exiting...\n\n");
-        System.out.println("************************Thank You!**************************\n");
+        System.out.println("======================== Thank You! ========================\n");
         scanner.close();
     }
 }

@@ -17,7 +17,7 @@ public class InventoryServiceImpl implements InventoryService {
             item.setQuantity(item.getQuantity() + quantity);
         }
         inventory.put(itemName, item);
-        System.out.println("\nAdded " + quantity + " " + itemName + " to inventory.\n");
+        System.out.println("\nAdding " + quantity + " " + itemName + " to inventory....\n");
     }
 
     @Override
@@ -26,10 +26,10 @@ public class InventoryServiceImpl implements InventoryService {
         StringBuilder sb = new StringBuilder();
         
         sb.append("Current Inventory:\n\n");
-        sb.append("Item\t\tQuantity\tPrice\n\n");
+        sb.append("Item\t\tQuantity\tPrice(LKR)\n\n");
         for (Map.Entry<String, InventoryItem> entry : inventory.entrySet()) {
             InventoryItem item = entry.getValue();
-            sb.append(item.getName()).append("\t\t").append(item.getQuantity()).append("\t\tRs.").append(item.getPrice()).append("\n");
+            sb.append(item.getName()).append("\t\t").append(item.getQuantity()).append("\t\t").append(item.getPrice()).append("\n");
         }
         return sb.toString();
     }
